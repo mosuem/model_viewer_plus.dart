@@ -107,6 +107,8 @@ class ModelViewer extends StatefulWidget {
   /// - a relative pathname for Flutter app assets
   ///   (for example, `assets/MyModel.glb`)
   ///
+  /// - a data URI containing the model's data
+  ///
   /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-loading-attributes-src
   final String src;
 
