@@ -1,3 +1,10 @@
+## 1.9.3
+
+### Changed
+- Update dependencies
+- Update model-viewer to 4.0.0
+
+
 ## 1.9.2
 
 ### Changed
