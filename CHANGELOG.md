@@ -1,3 +1,9 @@
+## 1.9.2
+
+### Changed
+-Add explicit data URI compatibility and fix said compatibility for mobile
+
+
 ## 1.9.1
 
 ### Changed

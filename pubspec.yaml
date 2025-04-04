@@ -21,6 +21,8 @@ dependencies:
   url_launcher: ^6.3.0
   web: ^1.0.0
   webview_flutter: ^4.6.0
+  webview_flutter_android: ^4.1.0
+  webview_flutter_wkwebview: ^3.16.3
 
 dev_dependencies:
   carapacik_lints: ^1.8.1
