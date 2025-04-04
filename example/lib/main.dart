@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           arModes: ['scene-viewer', 'webxr', 'quick-look'],
           autoRotate: true,
           iosSrc: 'https://modelviewer.dev/shared-assets/models/Astronaut.usdz',
-          disableZoom: true,
+          disableZoom: false,
         ),
       ),
     );
