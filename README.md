@@ -54,6 +54,19 @@ so you will need to configure your app's `android/app/src/main/AndroidManifest.x
             android:name=".MainActivity"
 ```
 
+Alternatively, you can achieve this using a [Network Security Configuration](https://developer.android.com/training/articles/security-config) by defining a configuration file (e.g., `res/xml/network_security_config.xml`) and referencing it in the `AndroidManifest.xml` using the `android:networkSecurityConfig` attribute within the `<application>` tag.
+Your `network_security_config.xml` should look something like this to allow traffic to `localhost` and `127.0.0.1`:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>
+```
+
 This does not affect Android 8 and earlier. See [#7] for more information.
 
 ### `app/build.gradle` (Android only)
