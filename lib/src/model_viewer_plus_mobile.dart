@@ -239,7 +239,6 @@ class ModelViewerState extends State<ModelViewer> {
     _proxy!.listen((request) async {
       final url = Uri.parse(widget.src);
       final response = request.response;
-
       switch (request.uri.path) {
         case '/':
         case '/index.html':
@@ -293,13 +292,30 @@ class ModelViewerState extends State<ModelViewer> {
           } else if (request.uri.hasAbsolutePath) {
             // Some gltf models need other resources from the origin
             final pathSegments = [...url.pathSegments]..removeLast();
-            final tryDestination = p.joinAll([
-              url.origin,
-              ...pathSegments,
-              request.uri.path.replaceFirst('/', ''),
-            ]);
-            debugPrint('Try: $tryDestination');
-            await response.redirect(Uri.parse(tryDestination));
+            if (url.isScheme('file')) {
+              final data = await _readFile(Uri.file('/${p.joinAll([
+                    ...pathSegments,
+                    request.uri.path.replaceFirst('/', '')
+                  ])}')
+                  .path);
+              response
+                ..statusCode = HttpStatus.ok
+                ..headers.add('Content-Type', 'application/octet-stream')
+                ..headers.add('Content-Length', data.lengthInBytes.toString())
+                ..headers.add('Access-Control-Allow-Origin', '*')
+                ..add(data);
+              await response.close();
+            } else {
+              final tryDestination = (url.isScheme('HTTP'))
+                  ? p.joinAll([
+                      url.origin,
+                      ...pathSegments,
+                      request.uri.path.replaceFirst('/', ''),
+                    ])
+                  : '';
+              debugPrint('Try: $tryDestination');
+              await response.redirect(Uri.parse(tryDestination));
+            }
           } else {
             debugPrint('404 with ${request.uri}');
             final text = utf8.encode("Resource '${request.uri}' not found");
