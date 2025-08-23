@@ -47,6 +47,7 @@ abstract class HTMLBuilder {
     final num? interpolationDecay,
     // Lighting & Env Attributes
     final String? skyboxImage,
+    final String? skyboxHeight,
     final String? environmentImage,
     final num? exposure,
     final num? shadowIntensity,
@@ -280,6 +281,10 @@ abstract class HTMLBuilder {
       modelViewerHtml
           .write(' skybox-image="${htmlEscape.convert(skyboxImage)}"');
     }
+    if (skyboxHeight != null) {
+      modelViewerHtml
+          .write(' skybox-height="${htmlEscape.convert(skyboxHeight)}"');
+    }
     // environment-image
     if (environmentImage != null) {
       modelViewerHtml.write(
@@ -295,9 +300,6 @@ abstract class HTMLBuilder {
     }
     // shadow-intensity
     if (shadowIntensity != null) {
-      if (shadowIntensity < 0 || shadowIntensity > 1) {
-        throw RangeError('shadow-intensity must be between 0 and 1');
-      }
       modelViewerHtml.write(' shadow-intensity="$shadowIntensity}"');
     }
     // shadow-softness

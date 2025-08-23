@@ -67,6 +67,7 @@ class ModelViewer extends StatefulWidget {
     this.minFieldOfView,
     this.interpolationDecay,
     this.skyboxImage,
+    this.skyboxHeight,
     this.environmentImage,
     this.exposure,
     this.shadowIntensity,
@@ -428,6 +429,7 @@ class ModelViewer extends StatefulWidget {
   ///
   /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-lightingandenv-attributes-skyboxImage
   final String? skyboxImage;
+  final String? skyboxHeight;
 
   /// Controls the environmental reflection of the model. Normally if
   /// skybox-image is set, that image will also be used for the environment-image.
