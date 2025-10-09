@@ -106,6 +106,7 @@ class ModelViewerState extends State<ModelViewer> {
       // Lighting & Env Attributes
       skyboxImage: widget.skyboxImage,
       skyboxHeight: widget.skyboxHeight,
+      toneMapping: widget.toneMapping,
       environmentImage: widget.environmentImage,
       exposure: widget.exposure,
       shadowIntensity: widget.shadowIntensity,

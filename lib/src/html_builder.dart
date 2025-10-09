@@ -48,6 +48,7 @@ abstract class HTMLBuilder {
     // Lighting & Env Attributes
     final String? skyboxImage,
     final String? skyboxHeight,
+    final String? toneMapping,
     final String? environmentImage,
     final num? exposure,
     final num? shadowIntensity,
@@ -284,6 +285,10 @@ abstract class HTMLBuilder {
     if (skyboxHeight != null) {
       modelViewerHtml
           .write(' skybox-height="${htmlEscape.convert(skyboxHeight)}"');
+    }
+    if(toneMapping != null){
+      modelViewerHtml
+          .write(' tone-mapping="${htmlEscape.convert(toneMapping)}"');
     }
     // environment-image
     if (environmentImage != null) {
