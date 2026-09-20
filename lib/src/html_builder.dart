@@ -305,14 +305,14 @@ abstract class HTMLBuilder {
     }
     // shadow-intensity
     if (shadowIntensity != null) {
-      modelViewerHtml.write(' shadow-intensity="$shadowIntensity}"');
+      modelViewerHtml.write(' shadow-intensity="$shadowIntensity"');
     }
     // shadow-softness
     if (shadowSoftness != null) {
       if (shadowSoftness < 0 || shadowSoftness > 1) {
         throw RangeError('shadow-softness must be between 0 and 1');
       }
-      modelViewerHtml.write(' shadow-softness="$shadowSoftness}"');
+      modelViewerHtml.write(' shadow-softness="$shadowSoftness"');
     }
 
     // Animation Attributes
