@@ -268,8 +268,10 @@ class ModelViewerState extends State<ModelViewer> {
           if (url.isAbsolute && !url.isScheme('file')) {
             await response.redirect(url);
           } else {
+            // toFilePath decodes percent-escapes; `path` keeps them, so a
+            // model named "Lüneburg" was looked up as "L%C3%BCneburg".
             final data = await (url.isScheme('file')
-                ? _readFile(url.path)
+                ? _readFile(url.toFilePath())
                 : _readAsset(url.path));
             response
               ..statusCode = HttpStatus.ok
@@ -295,11 +297,11 @@ class ModelViewerState extends State<ModelViewer> {
             // Some gltf models need other resources from the origin
             final pathSegments = [...url.pathSegments]..removeLast();
             if (url.isScheme('file')) {
-              final data = await _readFile(Uri.file('/${p.joinAll([
-                    ...pathSegments,
-                    request.uri.path.replaceFirst('/', '')
-                  ])}')
-                  .path);
+              final data = await _readFile(p.joinAll([
+                '/',
+                ...pathSegments,
+                Uri.decodeComponent(request.uri.path.replaceFirst('/', '')),
+              ]));
               response
                 ..statusCode = HttpStatus.ok
                 ..headers.add('Content-Type', 'application/octet-stream')
